@@ -1,7 +1,8 @@
-import logo from './logo.svg';
+
 import './App.css';
-import { Message } from './components/message.js'
+import { Message } from './components/Message.js'
 import { useState } from "react";
+import { Counter } from './components/Counter';
 
 let textInitial = "New Message";
 function App() {
@@ -16,6 +17,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Message className="Message" message={text} onButtonClick={handleClick} />
+        <Counter className="Message" />
 
       </header>
     </div>
