@@ -1,5 +1,28 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+
+* {
+  box-sizing: border-box;
+}
 .App {
   text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+.Message {
+  border: 2px solid #61dafb;
+  padding: 8px;
+  border-radius: 20px;
+}
+.Message-button {
+  border: 1px solid #eee;
+  box-shadow: 4px 4px 9px rgba(198, 198, 198, 0.36);
+  border-radius: 20px;
+  background: #f7f6f7;
+  padding: 0.8rem 1rem;
+  color: #e5e5e5;
+  background-image: linear-gradient(to left, #8e44ad, #3498db, #68d6da);
+  text-align: center;
+  font-size: large;
 }
 
 .App-logo {
