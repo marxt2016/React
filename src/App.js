@@ -25,10 +25,13 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <main>
+        <header className="App-header">
+          <h1>Lesson2 Chat App</h1>
+        </header>
         <Messages messages={messages} />
         <Form onMessageSend={handleMessageSend} />
-      </header>
+      </main>
     </div>
   );
 }
