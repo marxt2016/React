@@ -1,24 +1,33 @@
 
 import './App.css';
-import { Message } from './components/Message.js'
-import { useState } from "react";
-import { Counter } from './components/Counter';
+import { Messages } from './components/Messages.js'
+import React, { useState, useEffect } from "react";
+import { Form } from './components/Form';
 
-let textInitial = "New Message";
 function App() {
-  const [text, setText] = useState(textInitial);
-
-  const handleClick = () => {
-    console.log("Handle click");
-    setText("Updated message " + Math.floor(Math.random() * 100))
+  const [messages, setMessages] = useState([]);
+  const handleMessageSend = (text, author) => {
+    if (text.length) {
+      messages.push({ text, author });
+      setMessages([...messages])
+    }
   }
+
+  useEffect(() => {
+    let timer = 0;
+    if (messages.length > 0) {
+      if (messages[messages.length - 1].author === 'person') {
+        timer = setTimeout(() => handleMessageSend('Hello from bot', 'bot'), 1000);
+      }
+    }
+    return () => clearTimeout(timer);
+  }, [messages]);
 
   return (
     <div className="App">
       <header className="App-header">
-        <Message className="Message" message={text} onButtonClick={handleClick} />
-        <Counter className="Message" />
-
+        <Messages messages={messages} />
+        <Form onMessageSend={handleMessageSend} />
       </header>
     </div>
   );

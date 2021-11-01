@@ -10,7 +10,7 @@
 
 .Message {
   border: 2px solid #61dafb;
-  padding: 8px;
+  padding: 0.8rem 1rem;
   border-radius: 20px;
 }
 .Message-button {
