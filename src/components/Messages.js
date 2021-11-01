@@ -1,17 +1,14 @@
 import React from "react";
 const createMessage = (message, id) => {
     const { text, author } = message;
-
     let classname = 'Messages-content';
     if (author === 'person') {
-        console.log('IF person');
         classname += ' person';
     }
     return (
-        <div key={id} className={`${classname}`}>
+        <div key={id} className={classname}>
             < div className="text" > {text}</div >
         </div >
-
     )
 }
 
