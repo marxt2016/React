@@ -1,13 +1,13 @@
 import React from "react";
-const createMessage = (message, id) => {
-    const { text, author } = message;
+const createMessage = (message) => {
+    const { text, author, id } = message;
     let classname = 'Messages-content';
     if (author === 'person') {
         classname += ' person';
     }
     return (
         <div key={id} className={classname}>
-            < div className="text" > {text}</div >
+            < div className="text" ><span>{author}</span>:<span> {text}</span></div >
         </div >
     )
 }
@@ -15,7 +15,7 @@ const createMessage = (message, id) => {
 export const Messages = ({ messages }) => {
     return (
         <ul className='Messages-list' >
-            {messages.map((message, id) => createMessage(message, id))}
+            {messages.map(createMessage)}
         </ul>
     )
 }

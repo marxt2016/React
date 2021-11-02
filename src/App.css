@@ -8,21 +8,30 @@
   font-family: "Roboto", sans-serif;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 100vh;
-}
-
-.App-header {
-  background-color: #3498db;
-  overflow: visible;
-  width: 100%;
   max-width: 500px;
-  text-align: center;
-  color: white;
-  border-radius: 20px;
   margin: 0 auto;
 }
-.Message {
+
+h1 {
+  background-color: #0d6efd;
+  overflow: visible;
+  width: 100%;
+  text-align: center;
+  color: white;
+  border-radius: 0.25rem;
+}
+
+.Chatlist {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.list-group {
+  width: 30%;
+}
+/* .Message {
   border: 2px solid #61dafb;
   padding: 0.8rem 1rem;
   border-radius: 20px;
@@ -39,7 +48,7 @@
   background-image: linear-gradient(to left, #8e44ad, #3498db, #68d6da);
   text-align: center;
   font-size: large;
-}
+} */
 
 .Messages-list {
   padding: 10px 0;
@@ -66,8 +75,4 @@
 
 form {
   display: flex;
-  width: 50%;
-  justify-content: space-between;
-  max-width: 500px;
-  margin: 0 auto 40px;
 }
