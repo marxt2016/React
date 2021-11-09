@@ -20,11 +20,9 @@ export const InputForm = ({ onMessageSend }) => {
             id: `mes-${Date.now()}`
         })
         setValue('');
+        messageInputRef.current?.focus();
     }
 
-    useEffect(() => {
-        messageInputRef.current?.focus();
-    });
 
     return (
         <Form onSubmit={handleSubmit}>
