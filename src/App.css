@@ -1,38 +1,102 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+
+* {
+  box-sizing: border-box;
+}
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  /* text-align: center; */
+  font-family: "Roboto", sans-serif;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  max-width: 500px;
+  margin: 0 auto;
+}
+.container,
+h1 {
+  background-color: #0d6efd;
+  overflow: visible;
+  width: 100%;
+  text-align: center;
   color: white;
+  border-radius: 0.25rem;
+  max-width: 500px;
+}
+h2 {
+  background-color: #cfe2ff;
+  color: #084298;
+  overflow: visible;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  max-width: 500px;
 }
 
-.App-link {
-  color: #61dafb;
+a {
+  text-decoration: none;
+  color: white;
+  margin: 5px 15px;
+}
+a:hover {
+  color: rgba(255, 255, 255, 0.774);
+}
+.navbar-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Chatlist {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.list-group {
+  width: 40%;
+}
+/* .Message {
+  border: 2px solid #61dafb;
+  padding: 0.8rem 1rem;
+  border-radius: 20px;
+  flex-grow: 1;
+  outline: none;
+}
+.Message-button {
+  border: 1px solid #eee;
+  box-shadow: 4px 4px 9px rgba(198, 198, 198, 0.36);
+  border-radius: 20px;
+  background: #f7f6f7;
+  padding: 0.8rem 1rem;
+  color: #e5e5e5;
+  background-image: linear-gradient(to left, #8e44ad, #3498db, #68d6da);
+  text-align: center;
+  font-size: large;
+} */
+
+.Messages-list {
+  padding: 10px 0;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  list-style: none;
+  padding-left: 0;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.Messages-content > .text {
+  padding: 10px;
+  max-width: 400px;
+  margin: 0;
+  border-radius: 12px;
+  display: inline-block;
+}
+.Messages-content.person {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+form {
+  display: flex;
 }
