@@ -1,10 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import { AUTHORS } from './utils';
-
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-
-
 
 export const InputForm = ({ onMessageSend }) => {
     const messageInputRef = useRef();

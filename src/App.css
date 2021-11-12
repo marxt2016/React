@@ -8,11 +8,10 @@
   font-family: "Roboto", sans-serif;
   display: flex;
   flex-direction: column;
-  height: 100vh;
   max-width: 500px;
   margin: 0 auto;
 }
-
+.container,
 h1 {
   background-color: #0d6efd;
   overflow: visible;
@@ -20,6 +19,31 @@ h1 {
   text-align: center;
   color: white;
   border-radius: 0.25rem;
+  max-width: 500px;
+}
+h2 {
+  background-color: #cfe2ff;
+  color: #084298;
+  overflow: visible;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  max-width: 500px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  margin: 5px 15px;
+}
+a:hover {
+  color: rgba(255, 255, 255, 0.774);
+}
+.navbar-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .Chatlist {
@@ -29,7 +53,7 @@ h1 {
   justify-content: space-between;
 }
 .list-group {
-  width: 30%;
+  width: 40%;
 }
 /* .Message {
   border: 2px solid #61dafb;
