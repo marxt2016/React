@@ -51,10 +51,8 @@ const messagesInitial = {
 
 export function Chats() {
     let { id } = useParams();
-    console.log(id);
     const [messages, setMessages] = useState(messagesInitial);
     const [chatNames, setChatNames] = useState(chatNamesInitial);
-    console.log(messages);
     const handleMessageSend = useCallback((newMessage) => {
         if (newMessage.text.length) {
             setMessages(
@@ -87,7 +85,7 @@ export function Chats() {
             return () => clearTimeout(timer);
         }
 
-    }, [messages]);
+    });
 
 
     return (

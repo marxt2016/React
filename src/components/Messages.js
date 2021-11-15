@@ -10,7 +10,6 @@ const createMessage = (message) => {
 }
 
 export const Messages = ({ messages }) => {
-    console.log(messages);
     return (
         <ul className='Messages-list' >
             {messages.map(message => createMessage(message))}
