@@ -2,35 +2,43 @@ import React from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { Home } from './components/Home';
 import { Chats } from './components/Chats';
+import { Profile } from './components/Profile';
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import { Chatlist } from './components/Chatlist';
+import { Provider } from 'react-redux';
+import { store } from './store/index';
+
 
 
 export const App = () => (
-  <BrowserRouter>
-    <Navbar bg="light" variant="dark">
-      <Container>
-        <Nav className="me-auto my-2 my-lg-0"
-          style={{ maxHeight: '100px' }}>
+  <Provider store={store}>
+    <BrowserRouter>
+      <Navbar bg="light" variant="dark">
+        <Container>
+          <Nav className="me-auto my-2 my-lg-0"
+            style={{ maxHeight: '100px' }}>
 
-          <Link to="/" >Home</Link>
+            <Link to="/" >Home</Link>
 
-          <Link to="/chats" >Chats</Link>
-        </Nav>
-      </Container>
-    </Navbar>
+            <Link to="/chats" >Chats</Link>
+            <Link to="/profile" >Profile</Link>
+          </Nav>
+        </Container>
+      </Navbar>
 
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/chats" >
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="/chats" >
 
-        <Route path=":id" element={<Chats />} />
+          <Route path=":id" element={<Chats />} />
 
-        <Route index element={<Chatlist />} />
-      </Route>
+          <Route index element={<Chatlist />} />
+        </Route>
 
-    </Routes>
-  </BrowserRouter >
+      </Routes>
+    </BrowserRouter >
+  </Provider>
 )
 
 

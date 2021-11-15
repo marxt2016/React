@@ -40,11 +40,7 @@ const messagesInitial = {
         }
     ],
     jane: [
-        {
-            text: 'Message from Jane',
-            author: 'person',
-            id: 'jane'
-        }
+
     ],
 
 }
