@@ -3,6 +3,7 @@ import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { Home } from './components/Home';
 import { Chats } from './components/Chats';
 import { Nav, Navbar, Container } from 'react-bootstrap';
+import { Chatlist } from './components/Chatlist';
 
 
 export const App = () => (
@@ -25,7 +26,7 @@ export const App = () => (
 
         <Route path=":id" element={<Chats />} />
 
-        <Route index element={<Chats />} />
+        <Route index element={<Chatlist />} />
       </Route>
 
     </Routes>

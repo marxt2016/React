@@ -6,54 +6,76 @@ import { InputForm } from './InputForm';
 import { AUTHORS } from './utils';
 import { Chatlist } from './Chatlist';
 import { v4 as uuidv4 } from 'uuid';
+import { useParams } from 'react-router';
 
 export const chatNamesInitial = [
     {
         name: "John",
-        id: uuidv4(),
+        id: "john",
     },
     {
         name: "Mary",
-        id: uuidv4(),
+        id: "mary",
     },
     {
         name: "Jane",
-        id: uuidv4(),
+        id: "jane",
     },
-    {
-        name: "Jane111",
-        id: uuidv4(),
-    },
-    {
-        name: "Jane11",
-        id: uuidv4(),
-    },
+
 ]
 
+const messagesInitial = {
+    john: [
+        {
+            text: 'Message from John',
+            author: 'person',
+            id: 'john'
+        }
+    ],
+    mary: [
+        {
+            text: 'Message from Mary',
+            author: 'person',
+            id: 'mary'
+        }
+    ],
+    jane: [
+        {
+            text: 'Message from Jane',
+            author: 'person',
+            id: 'jane'
+        }
+    ],
+
+}
 
 export function Chats() {
-
-    const [messages, setMessages] = useState([]);
+    let { id } = useParams();
+    console.log(id);
+    const [messages, setMessages] = useState(messagesInitial);
     const [chatNames, setChatNames] = useState(chatNamesInitial);
-
+    console.log(messages);
     const handleMessageSend = useCallback((newMessage) => {
         if (newMessage.text.length) {
-            setMessages(prevMessages => [...prevMessages, newMessage])
+            setMessages(
+                (prevMessages) => ({ ...prevMessages, [id]: [...prevMessages[id], newMessage] })
+            )
         }
-    }, [])
+    }, [id])
 
-    const handleDelete = (id) => {
-        let index = chatNames.indexOf(chatNames.find(el => el.id === id));
+    const handleDelete = (element) => {
+        let index = chatNames.indexOf(chatNames.find(el => el.id === element.target.id));
         if (index > -1) {
-            chatNames.splice(chatNames.indexOf(chatNames.find(el => el.id === id)), 1);
+            chatNames.splice(chatNames.indexOf(chatNames.find(el => el.id === element.target.id)), 1);
         }
-        setChatNames([...chatNames])
+        setChatNames([...chatNames]);
     }
 
     useEffect(() => {
+
         if (
-            messages.length &&
-            messages[messages.length - 1].author !== AUTHORS.bot
+            messages[id].length &&
+            messages[id][messages[id].length - 1].author !== AUTHORS.bot
         ) {
             const timer = setTimeout(
                 () =>
@@ -73,7 +95,7 @@ export function Chats() {
             <main>
                 <div className='Chatlist'>
                     <Chatlist chatNames={chatNames} deleteChat={handleDelete} onChange={setChatNames} />
-                    <Messages messages={messages} />
+                    <Messages messages={messages[id]} />
                 </div>
                 <InputForm onMessageSend={handleMessageSend} />
             </main>

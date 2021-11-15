@@ -1,10 +1,11 @@
 
 import React, { useState, Fragment } from "react";
 import { ListGroup } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
+import { chatNamesInitial } from './Chats';
 
-export const Chatlist = ({ chatNames, deleteChat }) => {
-    console.log(chatNames);
+export const Chatlist = ({ chatNames = chatNamesInitial, deleteChat }) => {
+
     return (
         <ListGroup className='mt-2 mb-2 App' >
             {chatNames.map((chat) =>
@@ -14,7 +15,7 @@ export const Chatlist = ({ chatNames, deleteChat }) => {
                             style={({ isActive }) => ({ color: isActive ? "red" : "#084298" })}
                             to={`/chats/${chat.id}`} >{chat.name}
                         </NavLink>
-                        <a onClick={() => deleteChat(chat.id)}>&times;</a>
+                        <a onClick={deleteChat} id={chat.id} >&times;</a>
                     </ListGroup.Item>
 
                 </Fragment>
