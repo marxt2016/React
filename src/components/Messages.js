@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Navigate } from 'react-router-dom';
+
 const createMessage = (message) => {
     const { text, author, id } = message;
 
@@ -12,9 +12,6 @@ const createMessage = (message) => {
 }
 
 export const Messages = ({ messages }) => {
-    if (!messages) {
-        return <Navigate replace to="/chats" />
-    }
     return (
         <ul className='Messages-list' >
             {messages.map(message => createMessage(message))}
