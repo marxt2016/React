@@ -15,18 +15,17 @@ import { selectMessages } from '../store/messages/selector';
 export function Chats() {
     let { id } = useParams();
     const messages = useSelector(selectMessages);
-    // const selectMessagesForMyChat = useMemo(
-    //     () => (id) => (state) =>
-    //         state.messages[id],
-    //     [id]
-    // );
+
+    // const messagesByID = useMemo(() => selectMessagesForChat(id), [id]);
+    // const messagesForChat = useSelector(messagesByID);
+    // console.log(messagesForChat);
+
     const dispatch = useDispatch();
-    //const messagesForCurrentChat = useSelector(selectMessagesForMyChat);
     const handleMessageSend = useCallback((newMessage) => {
         if (newMessage.text.length) {
             dispatch(addMessage(id, newMessage));
         }
-    }, []);
+    }, [id]);
 
     useEffect(() => {
         if (
