@@ -1,23 +1,29 @@
 
 import '../App.css';
 import { Messages } from './Messages.js'
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useMemo } from "react";
 import { InputForm } from './InputForm';
 import { AUTHORS } from './utils';
 import { Chatlist } from './Chatlist';
-import { Form, Button } from 'react-bootstrap';
 //import { v4 as uuidv4 } from 'uuid';
 import { useParams } from 'react-router';
 import { Navigate } from 'react-router-dom';
-import { AddchatForm } from './AddchatForm';
+import { addMessage } from "../store/messages/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { selectMessages } from '../store/messages/selector';
 
-export function Chats({ chatNames, setChatNames, onAddChat, onDeleteChat, messages, setMessages }) {
+export function Chats() {
     let { id } = useParams();
+    const messages = useSelector(selectMessages);
+
+    // const messagesByID = useMemo(() => selectMessagesForChat(id), [id]);
+    // const messagesForChat = useSelector(messagesByID);
+    // console.log(messagesForChat);
+
+    const dispatch = useDispatch();
     const handleMessageSend = useCallback((newMessage) => {
         if (newMessage.text.length) {
-            setMessages(
-                (prevMessages) => ({ ...prevMessages, [id]: [...prevMessages[id], newMessage] })
-            )
+            dispatch(addMessage(id, newMessage));
         }
     }, [id]);
 
@@ -37,6 +43,7 @@ export function Chats({ chatNames, setChatNames, onAddChat, onDeleteChat, messag
         }
 
     });
+
     if (!messages[id]) {
         return <Navigate replace to="/chats" />;
     }
@@ -44,12 +51,7 @@ export function Chats({ chatNames, setChatNames, onAddChat, onDeleteChat, messag
         <div className="App">
             <main>
                 <div className='Chatlist'>
-                    <Chatlist
-                        chatNames={chatNames}
-                        onDeleteChat={onDeleteChat}
-                        onChange={setChatNames}
-                        onAddChat={onAddChat}
-                    />
+                    <Chatlist />
                     <Messages messages={messages[id]} />
                 </div>
                 <InputForm onMessageSend={handleMessageSend} />
