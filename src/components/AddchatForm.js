@@ -6,15 +6,16 @@ import { useDispatch } from 'react-redux';
 export const AddchatForm = () => {
     const dispatch = useDispatch();
     const [value, setValue] = useState('');
+
     const handleChange = (event) => {
         setValue(event.target.value);
-    }
+    };
     const handleSubmit = (event) => {
         event.preventDefault();
         const newId = `chat-${Date.now()}`
         dispatch(addChat({ name: value, id: newId }));
         setValue('');
-    }
+    };
     return (
 
         <Form className='mt-2' onSubmit={handleSubmit} >

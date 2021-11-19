@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const createMessage = (message) => {
     const { text, author, id } = message;
 
