@@ -24,14 +24,13 @@ export const getArticles = () => async (dispatch) => {
         console.log(response);
 
         if (!response.ok) {
-            throw new Error("not ok");
+            throw new Error("Please reload the page");
         }
 
         const result = await response.json();
 
         dispatch(getArticlesSuccess(result));
     } catch (err) {
-        console.warn(err);
         dispatch(getArticlesFailure(err.message));
     }
 };

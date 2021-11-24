@@ -30,13 +30,13 @@ export const Articles = () => {
                 {loading ?
                     (< Spinner className='mb-2' animation="border" variant="primary" />) :
                     (<>
-                        <Button className='reload' onClick={requestArticles}>Reload</Button>
+                        <Button className='mb-2 reload' onClick={requestArticles}>Reload</Button>
                         {error &&
-                            < Alert variant="danger" className="App">
+                            < Alert variant="danger" className="reload">
                                 <Alert.Heading>  <span>Error</span></Alert.Heading>
                             </Alert>
                         }
-                        <ListGroup className='mt-2 mb-2' >
+                        <ListGroup className='mb-2' >
                             {articles.map((article) => (
                                 < ListGroup.Item key={article.id} action variant="primary" >
                                     {article.title}

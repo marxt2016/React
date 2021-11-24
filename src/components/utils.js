@@ -3,6 +3,7 @@ export const AUTHORS = {
     bot: 'bot'
 }
 export const apiUrl = 'https://api.spaceflightnewsapi.net/v3/articles';
+export const apiUrlFilms = 'https://www.omdbapi.com/?s=marvel&apikey=e61b1990';
 
 export const REQUEST_STATUS = {
     IDLE: 0,
