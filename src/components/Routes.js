@@ -5,6 +5,7 @@ import { Chats } from '../components/Chats';
 import { Profile } from '../components/Profile';
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import { Chatlist } from '../components/Chatlist';
+import { Articles } from '../components/Articles';
 
 export const Router = () => (
     <BrowserRouter>
@@ -15,6 +16,7 @@ export const Router = () => (
                     <Link to="/" >Home</Link>
                     <Link to="/chats" >Chats</Link>
                     <Link to="/profile" >Profile</Link>
+                    <Link to="/articles" >Articles</Link>
                 </Nav>
             </Container>
         </Navbar>
@@ -28,6 +30,7 @@ export const Router = () => (
                 <Route element={<Home />} />
                 <Route path="*" element={<h3>404</h3>} />
             </Route>
+            <Route path="articles" element={<Articles />} />
         </Routes>
     </BrowserRouter >
 )
