@@ -1,11 +1,15 @@
 import { REQUEST_STATUS } from "../../components/utils";
-import { REQUEST_ARTICLES_LOADING, REQUEST_ARTICLES_SUCCESS, REQUEST_ARTICLES_FAILURE } from "./actions"
+import {
+    REQUEST_ARTICLES_FAILURE,
+    REQUEST_ARTICLES_LOADING,
+    REQUEST_ARTICLES_SUCCESS,
+} from "./actions";
 
 const initialState = {
-    arcticlesList: [],
+    articlesList: [],
     request: {
         status: REQUEST_STATUS.IDLE,
-        error: '',
+        error: "",
     },
 };
 
@@ -16,17 +20,17 @@ export const articlesReducer = (state = initialState, { type, payload }) => {
                 ...state,
                 request: {
                     ...state.request,
-                    status: REQUEST_STATUS.LOADING
+                    status: REQUEST_STATUS.LOADING,
                 },
             };
         case REQUEST_ARTICLES_SUCCESS:
             return {
                 ...state,
-                articles: payload,
+                articlesList: payload,
                 request: {
-                    error: '',
+                    error: "",
                     status: REQUEST_STATUS.SUCCESS,
-                }
+                },
             };
         case REQUEST_ARTICLES_FAILURE:
             return {
@@ -34,9 +38,9 @@ export const articlesReducer = (state = initialState, { type, payload }) => {
                 request: {
                     error: payload,
                     status: REQUEST_STATUS.FAILURE,
-                }
+                },
             };
         default:
             return state;
     }
-}
+};

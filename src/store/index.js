@@ -5,8 +5,7 @@ import { messagesReducer } from './messages/reducer';
 import { articlesReducer } from './articles/reducer';
 import thunk from 'redux-thunk';
 import storage from 'redux-persist/lib/storage';
-import { persistReducer } from 'redux-persist';
-import persistStore from 'redux-persist/es/persistStore';
+import { persistReducer, persistStore } from "redux-persist";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const config = {
