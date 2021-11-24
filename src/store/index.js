@@ -12,6 +12,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const config = {
     key: 'myapp',
     storage,
+    blacklist: ['articles'],
 }
 const persistedReducer = persistReducer(config, combineReducers({
     chats: chatsReducer,

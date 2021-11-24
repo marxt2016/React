@@ -5,33 +5,33 @@ export const REQUEST_ARTICLES_FAILURE = "ARTICLES::REQUEST_FAILURE";
 export const REQUEST_ARTICLES_SUCCESS = "ARTICLES::REQUEST_SUCCESS";
 
 export const getArticlesLoading = () => ({
-    type: REQUEST_ARTICLES_LOADING
+    type: REQUEST_ARTICLES_LOADING,
 });
-
 export const getArticlesSuccess = (articles) => ({
     type: REQUEST_ARTICLES_SUCCESS,
-    payload: articles
+    payload: articles,
 });
-
-export const getArticlesFailure = (error) => ({
+export const getArticlesFailure = (err) => ({
     type: REQUEST_ARTICLES_FAILURE,
-    payload: error
+    payload: err,
 });
 
 export const getArticles = () => async (dispatch) => {
     dispatch(getArticlesLoading());
+
     try {
-        const resp = await fetch(apiUrl)
-        if (!resp.ok) {
-            throw new Error('Error')
+        const response = await fetch(apiUrl);
+        console.log(response);
+
+        if (!response.ok) {
+            throw new Error("not ok");
         }
-        const result = await resp.json();
+
+        const result = await response.json();
 
         dispatch(getArticlesSuccess(result));
-
-    } catch (error) {
-        console.error(error);
-        dispatch(getArticlesFailure(error.message));
-
+    } catch (err) {
+        console.warn(err);
+        dispatch(getArticlesFailure(err.message));
     }
 };
