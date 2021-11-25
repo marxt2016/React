@@ -44,8 +44,8 @@ export const Films = () => {
                             {Array.from({ length: 2 }).map((_, idx) => (
                                 <>
                                     {films.map((film) => (
-                                        <Col key={film.id}>
-                                            <Card>
+                                        <Col key={film.id} >
+                                            <Card className='card-container'>
                                                 <Card.Img className='card-img' variant="top" src={film.Poster} />
                                                 <Card.Body className='card-title'>
                                                     <Card.Title >{film.Title}</Card.Title>
