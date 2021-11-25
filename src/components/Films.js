@@ -1,10 +1,29 @@
 import { apiUrlFilms } from "./utils";
 import { useState, useEffect } from 'react';
 import { ListGroup, Button, Alert, Spinner, CardGroup, Card, Row, Col } from 'react-bootstrap';
+import { getFilms } from "../store/films/actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    selectFilmsError,
+    selectFilmsList,
+    selectFilmsLoading,
+} from "../store/films/selectors";
 
 
 export const Films = () => {
-    const [films, setFilms] = useState([]);
+    //const [films, setFilms] = useState([]);
+    const dispatch = useDispatch();
+    const films = useSelector((state) => {
+        console.log(state);
+    });
+
+    // const loading = useSelector(selectArticlesLoading);
+    // const error = useSelector(selectArticlesError);
+
+    const requestFilms = async () => {
+        dispatch(getFilms());
+    };
+
 
     const getFilms = async () => {
         try {
@@ -15,7 +34,8 @@ export const Films = () => {
             const result = await response.json();
 
             console.log(result.Search);
-            setFilms(result.Search);
+            //setFilms(result.Search);
+            dispatch(getFilms());
         }
         catch (error) {
             console.error(error);
@@ -28,6 +48,7 @@ export const Films = () => {
 
     return (
         <>
+            <h2 className='mb-2 App'>Films list</h2>
             <div className='cards-container App'>
                 <Row xs={2} md={4} className="g-4">
                     {Array.from({ length: 2 }).map((_, idx) => (

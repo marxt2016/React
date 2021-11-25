@@ -6,6 +6,7 @@ import { articlesReducer } from './articles/reducer';
 import thunk from 'redux-thunk';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from "redux-persist";
+import { filmsReducer } from './films/reducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const config = {
@@ -18,6 +19,7 @@ const persistedReducer = persistReducer(config, combineReducers({
     profile: profileReducer,
     messages: messagesReducer,
     articles: articlesReducer,
+    films: filmsReducer,
 }));
 
 
