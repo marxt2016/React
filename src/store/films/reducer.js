@@ -2,7 +2,7 @@ import {
     REQUEST_FILMS_FAILURE,
     REQUEST_FILMS_LOADING,
     REQUEST_FILMS_SUCCESS,
-} from "./films";
+} from "./actions";
 
 const initialState = {
     filmsList: [],

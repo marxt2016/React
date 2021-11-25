@@ -34,3 +34,17 @@ export const getFilms = () => async (dispatch) => {
         dispatch(getFilmsFailure(err.message));
     }
 };
+// try {
+//     const response = await fetch(apiUrlFilms);
+//     if (!response.ok) {
+//         throw new Error('Something went wrong')
+//     }
+//     const result = await response.json();
+
+//     console.log(result.Search);
+//     //setFilms(result.Search);
+//     dispatch(getFilms());
+// }
+// catch (error) {
+//     console.error(error);
+// }

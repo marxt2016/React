@@ -8,18 +8,19 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from "redux-persist";
 import { filmsReducer } from './films/reducer';
 
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const config = {
     key: 'myapp',
     storage,
-    blacklist: ['articles'],
+    blacklist: ['articles', 'films'],
 }
 const persistedReducer = persistReducer(config, combineReducers({
     chats: chatsReducer,
     profile: profileReducer,
     messages: messagesReducer,
     articles: articlesReducer,
-    films: filmsReducer,
+    films: filmsReducer
 }));
 
 

@@ -102,12 +102,14 @@ form {
 }
 .reload {
   max-width: 100px;
+  align-items: flex-start;
 }
 .cards-container {
   display: flex;
   max-width: 800px;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin: 0 auto;
 }
 .card-title {
   font-size: 1.5rem;

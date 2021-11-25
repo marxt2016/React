@@ -11,70 +11,62 @@ import {
 
 
 export const Films = () => {
-    //const [films, setFilms] = useState([]);
     const dispatch = useDispatch();
-    const films = useSelector((state) => {
-        console.log(state);
-    });
-
-    // const loading = useSelector(selectArticlesLoading);
-    // const error = useSelector(selectArticlesError);
+    const films = useSelector(selectFilmsList);
+    const loading = useSelector(selectFilmsLoading);
+    const error = useSelector(selectFilmsError);
 
     const requestFilms = async () => {
         dispatch(getFilms());
     };
 
 
-    const getFilms = async () => {
-        try {
-            const response = await fetch(apiUrlFilms);
-            if (!response.ok) {
-                throw new Error('Something went wrong')
-            }
-            const result = await response.json();
-
-            console.log(result.Search);
-            //setFilms(result.Search);
-            dispatch(getFilms());
-        }
-        catch (error) {
-            console.error(error);
-        }
-    }
 
     useEffect(() => {
-        getFilms();
+        requestFilms();
     }, []);
 
     return (
         <>
             <h2 className='mb-2 App'>Films list</h2>
-            <div className='cards-container App'>
-                <Row xs={2} md={4} className="g-4">
-                    {Array.from({ length: 2 }).map((_, idx) => (
-                        <>
-                            {films.map((film) => (
-                                <Col>
-                                    <Card>
-                                        <Card.Img className='card-img' variant="top" src={film.Poster} />
-                                        <Card.Body className='card-title'>
-                                            <Card.Title >{film.Title}</Card.Title>
-                                            <Card.Text className='card-text'>
-                                                This is a longer card with supporting text below as a natura
-                                            </Card.Text>
-                                        </Card.Body>
+            <Button className='mb-2 cards-container' onClick={requestFilms}>Reload</Button>
+            {loading ?
+                (< Spinner className='mb-2 cards-container' animation="border" variant="primary" />) :
 
-                                        <Card.Footer>
-                                            <small className="text-muted">{film.Year}</small>
-                                        </Card.Footer>
-                                    </Card>
-                                </Col>
-                            ))
-                            }
-                        </>
-                    ))}
-                </Row>
-            </div>
+                (<>
+                    {error &&
+                        < Alert variant="danger" className="App">
+                            <Alert.Heading>  <span>Error</span></Alert.Heading>
+                        </Alert>
+                    }
+                    <div className='cards-container App' >
+                        <Row xs={2} md={4} className="g-4">
+                            {Array.from({ length: 2 }).map((_, idx) => (
+                                <>
+                                    {films.map((film) => (
+                                        <Col key={film.id}>
+                                            <Card>
+                                                <Card.Img className='card-img' variant="top" src={film.Poster} />
+                                                <Card.Body className='card-title'>
+                                                    <Card.Title >{film.Title}</Card.Title>
+                                                    <Card.Text className='card-text'>
+                                                        This is a longer card with supporting text below as a natura
+                                                    </Card.Text>
+                                                </Card.Body>
+
+                                                <Card.Footer>
+                                                    <small className="text-muted">{film.Year}</small>
+                                                </Card.Footer>
+                                            </Card>
+                                        </Col>
+                                    ))
+                                    }
+                                </>
+                            ))}
+                        </Row>
+                    </div>
+                </>)
+            }
         </>
     )
 }
