@@ -29,7 +29,6 @@ h2 {
   text-align: left;
   padding: 0.5rem;
   border-radius: 0.25rem;
-  max-width: 500px;
 }
 
 a {
@@ -102,7 +101,6 @@ form {
 }
 .reload {
   max-width: 100px;
-  align-items: flex-start;
 }
 .cards-container {
   display: flex;
@@ -131,7 +129,7 @@ form {
 }
 @media (max-width: 500px) {
   .cards-container .card-container {
-    width: 100%;
+    width: 80%;
     margin-right: 0%;
   }
 }

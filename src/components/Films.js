@@ -1,5 +1,5 @@
 import { apiUrlFilms } from "./utils";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { ListGroup, Button, Alert, Spinner, CardGroup, Card, Row, Col } from 'react-bootstrap';
 import { getFilms } from "../store/films/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,8 +20,6 @@ export const Films = () => {
         dispatch(getFilms());
     };
 
-
-
     useEffect(() => {
         requestFilms();
     }, []);
@@ -40,28 +38,29 @@ export const Films = () => {
                         </Alert>
                     }
                     <div className='cards-container App' >
-                        <Row xs={2} md={4} className="g-4">
+                        <Row xs={2} md={4} className="g-4" key={new Date().now}>
                             {Array.from({ length: 2 }).map((_, idx) => (
-                                <>
-                                    {films.map((film) => (
-                                        <Col key={film.id} >
-                                            <Card className='card-container'>
-                                                <Card.Img className='card-img' variant="top" src={film.Poster} />
-                                                <Card.Body className='card-title'>
-                                                    <Card.Title >{film.Title}</Card.Title>
-                                                    <Card.Text className='card-text'>
-                                                        This is a longer card with supporting text below as a natura
-                                                    </Card.Text>
-                                                </Card.Body>
+                                <Fragment key={idx} >
+                                    {
+                                        films.map((film) => (
+                                            <Col key={film.imdbID} >
+                                                <Card className='card-container'   >
+                                                    <Card.Img className='card-img' variant="top" src={film.Poster} />
+                                                    <Card.Body className='card-title'>
+                                                        <Card.Title >{film.Title}</Card.Title>
+                                                        <Card.Text className='card-text'>
+                                                            This is a longer card with supporting text below as a natura
+                                                        </Card.Text>
+                                                    </Card.Body>
 
-                                                <Card.Footer>
-                                                    <small className="text-muted">{film.Year}</small>
-                                                </Card.Footer>
-                                            </Card>
-                                        </Col>
-                                    ))
+                                                    <Card.Footer>
+                                                        <small className="text-muted">{film.Year}</small>
+                                                    </Card.Footer>
+                                                </Card>
+                                            </Col>
+                                        ))
                                     }
-                                </>
+                                </Fragment>
                             ))}
                         </Row>
                     </div>
