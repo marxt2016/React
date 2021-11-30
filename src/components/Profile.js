@@ -3,6 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import { toggleCheckbox, changeName, signOut } from '../store/profile/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectName } from "../store/profile/selectors";
+import { logOut } from "../services/firebase";
 
 export const Profile = () => {
     const profileState = useSelector(selectName);
@@ -26,6 +27,15 @@ export const Profile = () => {
 
     const handleClick = () => {
         dispatch(signOut());
+    };
+
+    const handleLogoutClick = async () => {
+        try {
+            await logOut();
+        } catch (error){
+            console.error(error);
+         }
+        
     };
 
 
@@ -54,7 +64,7 @@ export const Profile = () => {
                     type="submit"
                     value="Signout"
                     className="mt-2 reload"
-                    onClick={handleClick}
+                    onClick={handleLogoutClick}
                 >Sign out</Button>
             </div>
         </>

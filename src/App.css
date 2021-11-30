@@ -45,6 +45,7 @@ a:hover {
   justify-content: space-between;
 }
 
+
 .Chatlist {
   width: 100%;
   display: flex;
@@ -127,6 +128,16 @@ form {
 .card-img {
   height: 300px;
 }
+
+.linkNav{
+  text-decoration: none;
+  color: rgb(16, 9, 104);
+  
+}
+.linkNav:hover {
+  color: rgba(173, 183, 236, 0.486);
+}
+
 @media (max-width: 500px) {
   .cards-container .card-container {
     width: 80%;

@@ -1,5 +1,5 @@
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-import React from "react";
+import React, { useEffect} from "react";
 import { Home } from '../components/Home';
 import { Chats } from '../components/Chats';
 import { Profile } from '../components/Profile';
@@ -9,8 +9,25 @@ import { Articles } from '../components/Articles';
 import { Films } from './Films';
 import { PublicRoute } from '../components/PublicRoute';
 import { PrivateRoute } from '../components/PrivateRoute';
+import { SignUp } from './SignUp';
+import { auth, logIn, logOut } from '../services/firebase';
+import { useDispatch } from 'react-redux';
+import { signOut, signIn } from '../store/profile/actions';
 
-export const Router = () => (
+export const Router = () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                dispatch(signIn());
+            } else {
+                dispatch(signOut());
+           }
+        });
+        return () => unsubscribe();
+    }, []);
+
+    return (
     <BrowserRouter>
         <Navbar bg="light" variant="dark">
             <Container>
@@ -31,6 +48,11 @@ export const Router = () => (
                     <Home />
                 </PublicRoute>
             } />
+            <Route path="signup" element={
+                <PublicRoute>
+                    <SignUp />
+                </PublicRoute>
+            } />
             <Route path="profile" element={
                 <PrivateRoute>
                     <Profile />
@@ -47,3 +69,4 @@ export const Router = () => (
         </Routes>
     </BrowserRouter >
 )
+};
