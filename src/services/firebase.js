@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import {getDatabase, ref } from "firebase/database";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAdcO4rYMa5oux9R95gZf3fOOcHUDemvR0",
@@ -21,3 +22,7 @@ export const logIn = async (email, password) =>
     await signInWithEmailAndPassword(auth, email, password);
 
 export const logOut = async () => await signOut(auth);
+
+export const db = getDatabase(app);
+
+export const userRef = ref(db, 'user');

@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button } from 'react-bootstrap';
 import { toggleCheckbox, changeName, signOut } from '../store/profile/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectName } from "../store/profile/selectors";
-import { logOut } from "../services/firebase";
+import { logOut, userRef } from "../services/firebase";
+import { onValue, set } from "firebase/database";
 
 export const Profile = () => {
     const profileState = useSelector(selectName);
     const [value, setValue] = useState('');
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        const unsubscribe = onValue(userRef, (snapshot) => {
+            const userData = snapshot.val();
+            dispatch(changeName(userData?.name||''));
+        });
+        return unsubscribe;
+    }, [value]);
+
 
     const handleChange = () => {
         dispatch(toggleCheckbox);
@@ -21,7 +31,10 @@ export const Profile = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (value) {
-            dispatch(changeName(value));
+            set(userRef, {
+                name:value,
+            })
+            //dispatch(changeName(value));
         }
     };
 
