@@ -3,19 +3,8 @@ import React, { useState } from "react";
 import { addChat } from '../store/chats/actions';
 import { useDispatch } from 'react-redux';
 
-export const AddchatForm = () => {
-    const dispatch = useDispatch();
-    const [value, setValue] = useState('');
-
-    const handleChange = (event) => {
-        setValue(event.target.value);
-    };
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const newId = `chat-${Date.now()}`
-        dispatch(addChat({ name: value, id: newId }));
-        setValue('');
-    };
+export const AddchatForm = ({ handleChange, handleSubmit, value, setValue }) => {
+    
     return (
 
         <Form className='mt-2' onSubmit={handleSubmit} >

@@ -1,5 +1,5 @@
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-import React, { useEffect} from "react";
+import React, { useEffect, useState} from "react";
 import { Home } from '../components/Home';
 import { Chats } from '../components/Chats';
 import { Profile } from '../components/Profile';
@@ -10,12 +10,25 @@ import { Films } from './Films';
 import { PublicRoute } from '../components/PublicRoute';
 import { PrivateRoute } from '../components/PrivateRoute';
 import { SignUp } from './SignUp';
-import { auth, logIn, logOut } from '../services/firebase';
+import { auth, logIn, logOut, messagesRef } from '../services/firebase';
 import { useDispatch } from 'react-redux';
 import { signOut, signIn } from '../store/profile/actions';
+import { onValue, set } from "firebase/database";
 
 export const Router = () => {
     const dispatch = useDispatch();
+    const [messages, setMessages] = useState({});
+
+    useEffect(() => {
+        onValue(messagesRef, (snapshot) => {
+            const newMessages = {};
+            snapshot.forEach((messagesSnapshot) => {
+                newMessages[messagesSnapshot.key] = Object.values(messagesSnapshot.val().messagesList || {}) || [];
+            });
+            setMessages(newMessages);
+        });
+    }, []);
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
@@ -59,7 +72,7 @@ export const Router = () => {
                 </PrivateRoute>
             } />
             <Route path="chats" >
-                <Route path=":id" element={<PrivateRoute><Chats /></PrivateRoute>} />
+                    <Route path=":id" element={<PrivateRoute><Chats messages={ messages} /></PrivateRoute>} />
                 <Route index element={<PrivateRoute><Chatlist /></PrivateRoute>} />
                 <Route element={<PublicRoute><Home /></PublicRoute>} />
                 <Route path="*" element={<h3>404</h3>} />

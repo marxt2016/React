@@ -26,3 +26,9 @@ export const logOut = async () => await signOut(auth);
 export const db = getDatabase(app);
 
 export const userRef = ref(db, 'user');
+
+export const chatsRef = ref(db, 'chats');
+export const messagesRef = ref(db, 'messages');
+export const getChatRefById = (id) => ref(db, `chats/${id}`);
+export const getMessagesRefById = (chatId) => ref(db, `messages/${chatId}`);
+export const getMessagesListRefById = (chatId) => ref(db, `messages/${chatId}/messagesList`);

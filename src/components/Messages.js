@@ -11,9 +11,12 @@ const createMessage = (message) => {
 }
 
 export const Messages = ({ messages }) => {
-    return (
-        <ul className='Messages-list' >
-            {messages.map(message => createMessage(message))}
-        </ul>
-    )
+    console.log(messages);
+   
+        return (
+            <ul className='Messages-list' >
+                {messages.map(message => createMessage(message))}
+            </ul>
+        )
+   
 }
