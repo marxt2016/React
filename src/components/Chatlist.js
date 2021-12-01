@@ -5,15 +5,13 @@ import { NavLink } from 'react-router-dom';
 import { selectChats } from "../store/chats/selector";
 import { AddchatForm } from './AddchatForm';
 import { useSelector } from "react-redux";
-import { deleteChat } from '../store/chats/actions';
+import { addChatFB, deleteChat, initChatsTracking } from '../store/chats/actions';
 import { useDispatch } from 'react-redux';
-import { onValue, set } from "firebase/database";
-import { chatsRef, getChatRefById, getMessagesRefById } from "../services/firebase";
-import { addChat } from '../store/chats/actions';
+
 
 
 export const Chatlist = () => {
-    const [chats, setChats] = useState([]);
+    //const [chats, setChats] = useState([]);
     const chatNames = useSelector(selectChats);
     const dispatch = useDispatch();
     const handleDelete = (event) => {
@@ -29,25 +27,21 @@ export const Chatlist = () => {
         event.preventDefault();
         const newId = `chat-${Date.now()}`;
         //dispatch(addChat({ name: value, id: newId }));
-        set(getChatRefById(newId), { name: value, id: newId });
-        set(getMessagesRefById(newId), {empty:true});
+        // set(getChatRefById(newId), { name: value, id: newId });
+        // set(getMessagesRefById(newId), {empty:true});
+        dispatch(addChatFB({name: value, id: newId }))
         setValue('');
     };
 
     useEffect(() => {
-        onValue(chatsRef, (chatsSnapshot) => {
-            const newChats = [];
-            chatsSnapshot.forEach((snap) => {
-                newChats.push(snap.val());
-            });
-            setChats(newChats);
-        });
+        dispatch(initChatsTracking())
+       
     }, []);
 
     return (
         <>
             <ListGroup className='mt-2 mb-2 App' >
-                {chats.map((chat) => {
+                {chatNames.map((chat) => {
                     return (<Fragment key={chat.id}>
                         <ListGroup.Item action variant="primary" >
                             <NavLink
