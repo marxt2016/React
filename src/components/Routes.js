@@ -5,6 +5,10 @@ import { Chats } from '../components/Chats';
 import { Profile } from '../components/Profile';
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import { Chatlist } from '../components/Chatlist';
+import { Articles } from '../components/Articles';
+import { Films } from './Films';
+import { PublicRoute } from '../components/PublicRoute';
+import { PrivateRoute } from '../components/PrivateRoute';
 
 export const Router = () => (
     <BrowserRouter>
@@ -15,19 +19,31 @@ export const Router = () => (
                     <Link to="/" >Home</Link>
                     <Link to="/chats" >Chats</Link>
                     <Link to="/profile" >Profile</Link>
+                    <Link to="/articles" >Articles</Link>
+                    <Link to="/films" >Films</Link>
                 </Nav>
             </Container>
         </Navbar>
 
         <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="profile" element={<Profile />} />
+            <Route path="/" element={
+                <PublicRoute>
+                    <Home />
+                </PublicRoute>
+            } />
+            <Route path="profile" element={
+                <PrivateRoute>
+                    <Profile />
+                </PrivateRoute>
+            } />
             <Route path="chats" >
-                <Route path=":id" element={<Chats />} />
-                <Route index element={<Chatlist />} />
-                <Route element={<Home />} />
+                <Route path=":id" element={<PrivateRoute><Chats /></PrivateRoute>} />
+                <Route index element={<PrivateRoute><Chatlist /></PrivateRoute>} />
+                <Route element={<PublicRoute><Home /></PublicRoute>} />
                 <Route path="*" element={<h3>404</h3>} />
             </Route>
+            <Route path="articles" element={<Articles />} />
+            <Route path="films" element={<Films />} />
         </Routes>
     </BrowserRouter >
 )
