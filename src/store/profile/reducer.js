@@ -16,7 +16,7 @@ export const profileReducer = (state = initialState, action) => {
         case CHANGE_NAME:
             return {
                 ...state,
-                name: action.payload,
+                name: action.payload || '',
             };
         case SIGN_IN:
             return {

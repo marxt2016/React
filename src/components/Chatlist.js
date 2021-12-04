@@ -1,20 +1,43 @@
 
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { ListGroup } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { selectChats } from "../store/chats/selector";
 import { AddchatForm } from './AddchatForm';
 import { useSelector } from "react-redux";
-import { deleteChat } from '../store/chats/actions';
+import { addChatFB, deleteChat, initChatsTracking } from '../store/chats/actions';
 import { useDispatch } from 'react-redux';
 
 
+
 export const Chatlist = () => {
+    //const [chats, setChats] = useState([]);
     const chatNames = useSelector(selectChats);
     const dispatch = useDispatch();
     const handleDelete = (event) => {
         dispatch(deleteChat(event.target.id));
     };
+
+    const [value, setValue] = useState('');
+
+    const handleChange = (event) => {
+        setValue(event.target.value);
+    };
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const newId = `chat-${Date.now()}`;
+        //dispatch(addChat({ name: value, id: newId }));
+        // set(getChatRefById(newId), { name: value, id: newId });
+        // set(getMessagesRefById(newId), {empty:true});
+        dispatch(addChatFB({name: value, id: newId }))
+        setValue('');
+    };
+
+    useEffect(() => {
+        dispatch(initChatsTracking())
+       
+    }, []);
+
     return (
         <>
             <ListGroup className='mt-2 mb-2 App' >
@@ -30,7 +53,7 @@ export const Chatlist = () => {
                     </Fragment>)
                 }
                 )}
-                <AddchatForm />
+                <AddchatForm handleSubmit={handleSubmit} handleChange={handleChange} value={value} />
             </ListGroup>
 
         </>

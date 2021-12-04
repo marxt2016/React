@@ -1,0 +1,34 @@
+import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import {getDatabase, ref } from "firebase/database";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAdcO4rYMa5oux9R95gZf3fOOcHUDemvR0",
+    authDomain: "chtas-gb.firebaseapp.com",
+    projectId: "chtas-gb",
+    storageBucket: "chtas-gb.appspot.com",
+    messagingSenderId: "22554213001",
+    appId: "1:22554213001:web:40d9b34f6c73468b602458"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+export const auth = getAuth(app);
+export const signUp = async (email, password) =>
+    await createUserWithEmailAndPassword(auth, email, password);
+
+export const logIn = async (email, password) =>
+    await signInWithEmailAndPassword(auth, email, password);
+
+export const logOut = async () => await signOut(auth);
+
+export const db = getDatabase(app);
+
+export const userRef = ref(db, 'user');
+
+export const chatsRef = ref(db, 'chats');
+export const messagesRef = ref(db, 'messages');
+export const getChatRefById = (id) => ref(db, `chats/${id}`);
+export const getMessagesRefById = (chatId) => ref(db, `messages/${chatId}`);
+export const getMessagesListRefById = (chatId) => ref(db, `messages/${chatId}/messagesList`);

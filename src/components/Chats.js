@@ -10,10 +10,12 @@ import { Navigate } from 'react-router-dom';
 import { addMessageWithAutoReply } from "../store/messages/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { selectMessages } from '../store/messages/selector';
+import { push } from 'firebase/database';
+import { getMessagesListRefById } from '../services/firebase';
 
-export function Chats() {
+export function Chats({ messages}) {
     let { id } = useParams();
-    const messages = useSelector(selectMessages);
+    //const messages = useSelector(selectMessages);
 
     // const messagesByID = useMemo(() => selectMessagesForChat(id), [id]);
     // const messagesForChat = useSelector(messagesByID);
@@ -22,7 +24,8 @@ export function Chats() {
     const dispatch = useDispatch();
     const handleMessageSend = useCallback((newMessage) => {
         if (newMessage.text.length) {
-            dispatch(addMessageWithAutoReply(id, newMessage));
+            //dispatch(addMessageWithAutoReply(id, newMessage));
+            push(getMessagesListRefById(id), newMessage);
         }
     }, [id]);
 
@@ -36,7 +39,7 @@ export function Chats() {
                     <Chatlist />
                     <Messages messages={messages[id]} />
                 </div>
-                <InputForm onMessageSend={handleMessageSend} />
+                <InputForm onMessageSend={handleMessageSend}  />
             </main>
         </div>
     );
